@@ -1,0 +1,55 @@
+1. Write a query for the HR department to produce the addresses of all the departments. Use
+the LOCATIONS and COUNTRIES tables. Show the location ID, street address, city, state     or province, and country in the output.
+
+--->mysql> SELECT location_id, street_address,city, state_province, country_name FROM locations JOIN countries ON locations.country_id=countries.country_id;
+
+2. The HR department needs a report of all employees. Write a query to display the last name,
+department number, and department name for all the employees.
+---->mysql> SELECT last_name, employees.department_id, department_name FROM employees JOIN departments ON employees.department_id=departments.department_id ;
+
+
+3. Create a report to display employees’ last names and employee number along with their
+    managers’ last names and manager number. Label the columns Employee, Emp#,
+  Manager, and Mgr#, respectively. Save your SQL statement as lab_06_04.sql. Run
+the query.
+---->
+
+
+
+4. Create a report for the HR department that displays employee last names, department
+    numbers, and all the employees who work in the same department as a given employee. Give
+    each column an appropriate label.
+--->
+
+
+
+
+5.The query should display the last name and hire date of any employee who work in the same    
+    department in which Zlotkey (last name of an employee) work (excluding that employee).
+---> mysql> SELECT last_name, hire_date FROM employees WHERE department_id=( SELECT department_id from employees where last_name="Zlotkey") AND last_name <> "Zlotkey";
+
+6. Create a report that displays the employee number, last name, and salary of all employees
+     who earn more than the average salary. Sort the results in order of ascending salary.
+---> mysql> SELECT employee_id, last_name,salary FROM employees WHERE salary > (SELECT AVG(salary) from employees) order by salary;
+
+
+7. Write a query that displays the employee number and last name of all employees who work
+    in a department with any employee whose last name contains a “u.”
+---->mysql> select employee_id, last_name from employees where department_id in (select department_id from employees where last_name like "%u%");
+
+8. The HR department needs a report that displays the last name, department number, and job ID    
+     of all employees whose department location ID is 1700.
+--->mysql> select last_name, department_id , job_id from employees where department_id IN (select department_id from departments where location_id =1700);
+
+9. Create a report for HR that displays the department number, last name, and job ID for every
+    employee in the Executive department.
+---->mysql> select department_id, last_name , job_id from employees where department_id IN (select department_id from departments where department_name ="Executive");
+
+10. display the employee number, last name, and salary of all employees who earn more than the    
+      average salary and who work in a department with any employee whose last name contains a    
+      “u.”
+---->  mysql> select employee_id, last_name, salary from employees where 'salary>select avg(salary) from employees' AND 'SELECT department_id from departments where last_name like "%u%"';
+
+
+
+
